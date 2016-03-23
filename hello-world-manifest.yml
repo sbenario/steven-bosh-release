@@ -1,0 +1,64 @@
+---
+name: hello-world-windows-deployment
+director_uuid: da12b3a5-a060-427c-a60c-9fd0c7643a3c
+
+releases:
+- name: steven-bosh-release
+  version: latest
+
+networks:
+- name: default
+  subnets:
+  - range: 10.87.23.0/24
+    gateway: 10.87.23.1
+    reserved:
+    - 10.87.23.1
+    - 10.87.23.50-10.87.23.254
+    dns:
+    - 10.87.23.1
+    cloud_properties:
+      name: stonetalon
+
+resource_pools:
+- name: default
+  stemcell:
+    name: bosh-vsphere-esxi-windows-2012R2-go_agent
+    version: 0.0.111
+  network: default
+  cloud_properties:
+    cpu: 2
+    ram: 2048
+    disk: 2048
+
+compilation:
+  workers: 2
+  network: default
+  resource_pool: default
+  cloud_properties:
+    cpu: 2
+    ram: 2048
+    disk: 2048
+
+update:
+  canaries: 0
+  canary_watch_time: 60000
+  update_watch_time: 60000
+  max_in_flight: 2
+
+jobs:
+- name: windowsJob1
+  templates:
+  - name: windowsJob1
+  instances: 1
+  resource_pool: default
+  networks:
+  - name: default
+
+- name: checkWindowsUsers
+  lifecycle: errand
+  templates:
+  - name: windowsJob1
+  instances: 1
+  resource_pool: default
+  networks:
+  - name: default

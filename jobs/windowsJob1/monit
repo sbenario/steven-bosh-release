@@ -1,0 +1,9 @@
+{
+  "processes": [
+    {
+      "name": "windowsProcess1",
+      "executable": "powershell",
+      "args": [ "/var/vcap/jobs/windowsJob1/bin/start.ps1" ]
+    }
+  ]
+}

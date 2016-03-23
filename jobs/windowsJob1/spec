@@ -1,0 +1,9 @@
+---
+name: windowsJob1
+templates:
+  userCheck.erb: bin/run.ps1
+  job1template.ps1: bin/start.ps1
+  drain.ps1: bin/drain.ps1
+  pre-start.ps1: bin/pre-start.ps1
+  
+packages:

@@ -1,0 +1,4 @@
+Write-Host "I am executing a BOSH ERRAND"
+Get-WmiObject -Class Win32_UserAccount 
+
+Get-WmiObject -Class Win32_UserAccount > /var/vcap/sys/log/userCheck/userCheck.stdout.log
